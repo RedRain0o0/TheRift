@@ -28,14 +28,17 @@ public class Therift implements DedicatedServerModInitializer {
     public static final Config CONFIG = new Config();
     public static BotHandler DISCORD;
 
-    private static final DiscordWebhook WEBHOOKMIKU = new DiscordWebhook(CONFIG.webhookMiku);
-    private static final DiscordWebhook WEBHOOKRAD = new DiscordWebhook(CONFIG.webhookRad);
+    private static DiscordWebhook WEBHOOKMIKU = null;
+    private static DiscordWebhook WEBHOOKRAD = null;
 
 
     @Override
     public void onInitializeServer() {
         try {
             if (tryInitConfig()) {
+                LOGGER.info("{}, {}, {}, {}, {}, {}, {}", CONFIG.token, CONFIG.channelIdMiku, CONFIG.channelIdRad, CONFIG.webhookMiku, CONFIG.webhookRad, CONFIG.serverName, CONFIG.serverIconUrl);
+                WEBHOOKMIKU = new DiscordWebhook(CONFIG.webhookMiku);
+                WEBHOOKRAD = new DiscordWebhook(CONFIG.webhookRad);
                 ServerLifecycleEvents.SERVER_STARTED.register(this::serverStart);
                 ServerPlayConnectionEvents.JOIN.register(this::onPlayerJoin);
                 ServerMessageEvents.CHAT_MESSAGE.register(this::onPlayerChat);
@@ -74,10 +77,10 @@ public class Therift implements DedicatedServerModInitializer {
 
     public void serverStart(MinecraftServer server) {
         LOGGER.info("Server {} started, notify webhooks", server.getPort());
-        //WEBHOOKMIKU.setUsername(CONFIG.serverName);
-        //WEBHOOKRAD.setUsername(CONFIG.serverName);
-        //WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
-        //WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKMIKU.setUsername(CONFIG.serverName);
+        WEBHOOKRAD.setUsername(CONFIG.serverName);
+        WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
         WEBHOOKMIKU.setContent("Server has started!");
         WEBHOOKRAD.setContent("Server has started!");
         try {
@@ -91,10 +94,10 @@ public class Therift implements DedicatedServerModInitializer {
     public void onPlayerJoin(ServerGamePacketListenerImpl handler, PacketSender sender, MinecraftServer server) {
         //if (handler.player != null)
         LOGGER.info("{} joined the server, notify webhooks", handler.player.getDisplayName());
-        //WEBHOOKMIKU.setUsername(CONFIG.serverName);
-        //WEBHOOKRAD.setUsername(CONFIG.serverName);
-        //WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
-        //WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKMIKU.setUsername(CONFIG.serverName);
+        WEBHOOKRAD.setUsername(CONFIG.serverName);
+        WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
         WEBHOOKMIKU.setContent(handler.player.getName().getString() + " has joined the game!");
         WEBHOOKRAD.setContent(handler.player.getName().getString() + " has joined the game!");
         try {
@@ -135,10 +138,10 @@ public class Therift implements DedicatedServerModInitializer {
 
     public void onPlayerLeave(ServerGamePacketListenerImpl handler, MinecraftServer server) {
         LOGGER.info("{} left the server, notify webhooks", handler.player.getName().getString());
-        //WEBHOOKMIKU.setUsername(CONFIG.serverName);
-        //WEBHOOKRAD.setUsername(CONFIG.serverName);
-        //WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
-        //WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKMIKU.setUsername(CONFIG.serverName);
+        WEBHOOKRAD.setUsername(CONFIG.serverName);
+        WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
         WEBHOOKMIKU.setContent(handler.player.getName().getString() + " has left the game.");
         WEBHOOKRAD.setContent(handler.player.getName().getString() + " has left the game.");
         try {
@@ -151,10 +154,10 @@ public class Therift implements DedicatedServerModInitializer {
 
     public void serverShutdown(MinecraftServer server) {
         LOGGER.info("Server {} shutting down, notify webhooks", server.getPort());
-        //WEBHOOKMIKU.setUsername(CONFIG.serverName);
-        //WEBHOOKRAD.setUsername(CONFIG.serverName);
-        //WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
-        //WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKMIKU.setUsername(CONFIG.serverName);
+        WEBHOOKRAD.setUsername(CONFIG.serverName);
+        WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
+        WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
         WEBHOOKMIKU.setContent("Server has stopped.");
         WEBHOOKRAD.setContent("Server has stopped.");
         try {
@@ -164,12 +167,4 @@ public class Therift implements DedicatedServerModInitializer {
             throw new RuntimeException(e);
         }
     }
-
-    //public static void main(String[] args) {
-    //    DiscordClient client = DiscordClient.create("MTMxNzIyNjAwNDI1ODg4NTcwMw.GczdUK.V6SNZHMhgd4646_IokPm3-BMwZWe7TYCvbNd3Y");
-//
-    //    Mono<Void> login = client.withGateway((GatewayDiscordClient gateway) -> Mono.empty());
-//
-    //    login.block();
-    //}
 }

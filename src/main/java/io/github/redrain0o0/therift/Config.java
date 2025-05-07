@@ -47,12 +47,12 @@ public class Config {
         JsonObject obj = gson.fromJson(reader, JsonObject.class);
 
         token = getStringOrDefault(obj, "token", token);
-        token = getStringOrDefault(obj, "webhookMiku", webhookMiku);
-        token = getStringOrDefault(obj, "webhookRad", webhookRad);
-        token = getStringOrDefault(obj, "channelIdMiku", channelIdMiku);
-        token = getStringOrDefault(obj, "channelIdRad", channelIdRad);
-        token = getStringOrDefault(obj, "serverName", serverName);
-        token = getStringOrDefault(obj, "serverIconUrl", serverIconUrl);
+        webhookMiku = getStringOrDefault(obj, "webhookMiku", webhookMiku);
+        webhookRad = getStringOrDefault(obj, "webhookRad", webhookRad);
+        channelIdMiku = getStringOrDefault(obj, "channelIdMiku", channelIdMiku);
+        channelIdRad = getStringOrDefault(obj, "channelIdRad", channelIdRad);
+        serverName = getStringOrDefault(obj, "serverName", serverName);
+        serverIconUrl = getStringOrDefault(obj, "serverIconUrl", serverIconUrl);
 
         reader.close();
     }
