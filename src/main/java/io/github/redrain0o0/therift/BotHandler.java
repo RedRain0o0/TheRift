@@ -30,15 +30,6 @@ public class BotHandler extends ListenerAdapter implements EventListener {
                 .addEventListeners(new BotHandler())
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                 .build();
-        /*GatewayDiscordClient client = DiscordClientBuilder.create("MTMxNzIyNjAwNDI1ODg4NTcwMw.GczdUK.V6SNZHMhgd4646_IokPm3-BMwZWe7TYCvbNd3Y").build().login().;
-        if (client != null) {
-            client.getEventDispatcher().on(ReadyEvent.class)
-                    .subscribe(event -> {
-                        User self = event.getSelf();
-                        Therift.LOGGER.info("Logged in as {}#{}", self.getUsername(), self.getDiscriminator());
-                    });
-            client.onDisconnect().block();
-        }*/
     }
 
     @Override
@@ -58,10 +49,4 @@ public class BotHandler extends ListenerAdapter implements EventListener {
             }
         }
     }
-
-    //@Override
-    //public void onEvent(GenericEvent event) {
-    //    if (event instanceof ReadyEvent)
-    //        System.out.println("API is ready!");
-    //}
 }
