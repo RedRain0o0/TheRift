@@ -14,6 +14,7 @@ import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
@@ -23,6 +24,8 @@ import java.util.Objects;
 public class BotHandler extends ListenerAdapter implements EventListener {
 
     private static final Config config = Therift.CONFIG;
+
+    MinecraftServer server = (MinecraftServer) FabricLoader.getInstance().getGameInstance();
 
     public static void create(Config config) throws InterruptedException {
 
@@ -36,8 +39,8 @@ public class BotHandler extends ListenerAdapter implements EventListener {
     public void onMessageReceived(MessageReceivedEvent event) {
         if (!event.isFromType(ChannelType.PRIVATE) && !event.getAuthor().isBot() && (event.getChannel().getId().matches(config.channelIdRad) || event.getChannel().getId().matches(config.channelIdMiku))) {
             Therift.LOGGER.info("[{}] {}: {}", event.getGuild().getName(), Objects.requireNonNull(event.getMember()).getEffectiveName(), event.getMessage().getContentDisplay());
-            for (String playerName : Therift.rootserver.getPlayerNames()) {
-                Player player = Therift.rootserver.getPlayerList().getPlayerByName(playerName);
+            for (String playerName : server.getPlayerNames()) {
+                Player player = server.getPlayerList().getPlayerByName(playerName);
                 player.displayClientMessage(
                         Component.empty().append(
                                 Component.empty().append("[").append(event.getGuild().getName()).append("] ")

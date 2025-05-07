@@ -26,11 +26,11 @@ import java.io.IOException;
 public class Therift implements DedicatedServerModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("The Rift");
     public static final Config CONFIG = new Config();
+    public static BotHandler DISCORD;
 
     private static final DiscordWebhook WEBHOOKMIKU = new DiscordWebhook(CONFIG.webhookMiku);
     private static final DiscordWebhook WEBHOOKRAD = new DiscordWebhook(CONFIG.webhookRad);
 
-    public static MinecraftServer rootserver;
 
     @Override
     public void onInitializeServer() {
@@ -74,7 +74,6 @@ public class Therift implements DedicatedServerModInitializer {
 
     public void serverStart(MinecraftServer server) {
         LOGGER.info("Server {} started, notify webhooks", server.getPort());
-        this.rootserver = server;
         //WEBHOOKMIKU.setUsername(CONFIG.serverName);
         //WEBHOOKRAD.setUsername(CONFIG.serverName);
         //WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
