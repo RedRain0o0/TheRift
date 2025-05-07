@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "therift",
+  "version": "${version}",
+  "name": "TheRift",
+  "description": "Mod that connects any minecraft server to The Rift:tm:",
+  "authors": [
+    "RedRain0o0"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "server": [
+      "io.github.redrain0o0.therift.Therift"
+    ]
+  },
+  "mixins": [
+    "therift.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
