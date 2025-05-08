@@ -22,8 +22,8 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     //implementation "com.discord4j:discord4j-core:3.2.8"
-    implementation "net.dv8tion:JDA:5.5.1"
-    include "net.dv8tion:JDA:5.5.1"
+    include implementation "net.dv8tion:JDA:5.5.1"
+    include implementation("club.minnced:discord-webhooks:0.8.0")
     include "org.json:json:20230227"
     include "com.squareup.okio:okio:1.17.2"
     include "com.squareup.okhttp3:okhttp:3.13.0"
