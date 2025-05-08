@@ -104,8 +104,8 @@ public class Therift implements DedicatedServerModInitializer {
         WEBHOOKRAD.setUsername(CONFIG.serverName);
         WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
         WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
-        WEBHOOKMIKU.setContent(handler.player.getName().getString() + " has joined the game!");
-        WEBHOOKRAD.setContent(handler.player.getName().getString() + " has joined the game!");
+        WEBHOOKMIKU.setContent("[" + handler.player.getName().getString() + "](<https://namemc.com/profile/" + handler.player.getName().getString() + ".1)" + " has joined the game!");
+        WEBHOOKRAD.setContent("[" + handler.player.getName().getString() + "](<https://namemc.com/profile/" + handler.player.getName().getString() + ".1)" + " has joined the game!");
         try {
             WEBHOOKMIKU.execute();
             WEBHOOKRAD.execute();
@@ -188,8 +188,8 @@ public class Therift implements DedicatedServerModInitializer {
         WEBHOOKRAD.setUsername(CONFIG.serverName);
         WEBHOOKMIKU.setAvatarUrl(CONFIG.serverIconUrl);
         WEBHOOKRAD.setAvatarUrl(CONFIG.serverIconUrl);
-        WEBHOOKMIKU.setContent(handler.player.getName().getString() + " has left the game.");
-        WEBHOOKRAD.setContent(handler.player.getName().getString() + " has left the game.");
+        WEBHOOKMIKU.setContent("[" + handler.player.getName().getString() + "](<https://namemc.com/profile/" + handler.player.getName().getString() + ".1)" + " has left the game.");
+        WEBHOOKRAD.setContent("[" + handler.player.getName().getString() + "](<https://namemc.com/profile/" + handler.player.getName().getString() + ".1)" + " has left the game.");
         try {
             WEBHOOKMIKU.execute();
             WEBHOOKRAD.execute();
