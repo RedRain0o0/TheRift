@@ -21,11 +21,13 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.Objects;
 
+import static io.github.redrain0o0.therift.Therift.SERVER;
+
 public class BotHandler extends ListenerAdapter implements EventListener {
 
     private static final Config config = Therift.CONFIG;
 
-    MinecraftServer server = (MinecraftServer) FabricLoader.getInstance().getGameInstance();
+    private String toMinecraft = null;
 
     public static void create(Config config) throws InterruptedException {
 
@@ -39,15 +41,16 @@ public class BotHandler extends ListenerAdapter implements EventListener {
     public void onMessageReceived(MessageReceivedEvent event) {
         if (!event.isFromType(ChannelType.PRIVATE) && !event.getAuthor().isBot() && (event.getChannel().getId().matches(config.channelIdRad) || event.getChannel().getId().matches(config.channelIdMiku))) {
             Therift.LOGGER.info("[{}] {}: {}", event.getGuild().getName(), Objects.requireNonNull(event.getMember()).getEffectiveName(), event.getMessage().getContentDisplay());
-            for (String playerName : server.getPlayerNames()) {
-                Player player = server.getPlayerList().getPlayerByName(playerName);
+            toMinecraft = "Test";
+            for (String playerName : SERVER.getPlayerNames()) {
+                Player player = SERVER.getPlayerList().getPlayerByName(playerName);
                 player.displayClientMessage(
                         Component.empty().append(
-                                Component.empty().append("[").append(event.getGuild().getName()).append("] ")
+                                String.format("[%s] ", event.getGuild().getName())
                         ).append(
                                 Component.empty().append(Objects.requireNonNull(event.getMember()).getEffectiveName()).withColor(event.getMember().getColorRaw())
-                        )
-                                .append(": ").append(event.getMessage().getContentDisplay()
+                        ).append(": ")
+                                .append(event.getMessage().getContentDisplay()
                         ), false);
             }
         }

@@ -4,8 +4,7 @@
   "package": "io.github.redrain0o0.therift.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-  ],
-  "client": [
+    "PlayerAdvancementsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
